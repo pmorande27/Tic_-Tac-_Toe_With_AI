@@ -147,10 +147,11 @@ public class Board {
             if (searchPosition(winType,initialPosition,pieces)){
                 type =winType;
                 for(int j = 1; j<dimension;j++){
-                    if(!searchPosition(type,listOfPositions[j][i],pieces)){
-                        result= false;
-                        break;
+                    if (searchPosition(type, listOfPositions[j][i], pieces)) {
+                        continue;
                     }
+                    result= false;
+                    break;
                 }
             }
             else{
@@ -213,7 +214,7 @@ public class Board {
                 Position position = listOfPositions[i][j];
                 ArrayList<Pieces> pieces2 = new ArrayList<>(pieces);
                 if (!isOccupiedPosition(position,pieces2)){
-                   ArrayList<Pieces> newPositions = Turn(this.IA,position,pieces2);
+                   ArrayList<Pieces> newPositions = Turn(IA,position,pieces2);
                    int score = minimax(newPositions,0,false);
 
                    if(score>bestScore){
@@ -229,10 +230,10 @@ public class Board {
     }
 
     private int minimax(ArrayList<Pieces> newPositions, int depth, boolean isMax) throws IllegalMoveException {
-        if(checkWin(this.IA,newPositions)){
+        if(checkWin(IA,newPositions)){
             return 1;
         }
-        else if(checkWin(this.player,newPositions)){
+        else if(checkWin(player,newPositions)){
             return (-1);
         }
         else if(checkTie(newPositions)){
@@ -244,10 +245,10 @@ public class Board {
                 for (int j = 0; j < dimension; j++) {
                     Position position = listOfPositions[i][j];
                     if (!isOccupiedPosition(position, newPositions)) {
-                        ArrayList<Pieces>positions = Turn(this.IA, position, newPositions);
+                        ArrayList<Pieces>positions = Turn(IA, position, newPositions);
                         int score = minimax(positions, depth+1, false);
 
-                        positions.remove(new Pieces(this.IA,position));
+                        positions.remove(new Pieces(IA,position));
                         if (score > bestScore) {
                             bestScore = score;
                         }
@@ -263,9 +264,9 @@ public class Board {
                 for (int j = 0; j < dimension; j++) {
                     Position position = listOfPositions[i][j];
                     if (!isOccupiedPosition(position, newPositions)) {
-                        ArrayList<Pieces>positions = Turn(this.player, position, newPositions);
+                        ArrayList<Pieces>positions = Turn(player, position, newPositions);
                         int score = minimax(positions, depth + 1, true);
-                        positions.remove(new Pieces(this.player,position));
+                        positions.remove(new Pieces(player,position));
                         if (score < bestScore) {
                             bestScore = score;
                         }

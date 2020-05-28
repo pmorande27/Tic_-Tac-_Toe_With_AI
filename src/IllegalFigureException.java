@@ -1,4 +1,4 @@
-public class IllegalFigureException extends Exception {
+public class IllegalFigureException extends GameException {
     public IllegalFigureException(){
         super();
     }

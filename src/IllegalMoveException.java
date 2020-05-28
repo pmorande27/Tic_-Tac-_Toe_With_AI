@@ -1,4 +1,4 @@
-public class IllegalMoveException extends Exception{
+public class IllegalMoveException extends GameException{
     public IllegalMoveException(){
         super();
     }
