@@ -6,7 +6,7 @@ import java.util.Random;
 public enum PieceType {
     X,
     O;
-    //...
+
 
     private static final List<PieceType> VALUES =
             Collections.unmodifiableList(Arrays.asList(values()));
